@@ -8,6 +8,7 @@ import {
   type BillLine,
   type ItemCategory,
 } from "../lib/store";
+import { UpiQr } from "../lib/upi-qr";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -300,6 +301,12 @@ function NewBillPage() {
               {formatINR(totals.total)}
             </span>
           </div>
+
+          {totals.total > 0 && (
+            <div className="mt-4">
+              <UpiQr amount={totals.total} />
+            </div>
+          )}
 
           {error && <p className="mt-3 text-sm font-medium text-coral">{error}</p>}
 
