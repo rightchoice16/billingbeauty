@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { useStore, formatINR, type Bill } from "../lib/store";
+import { UpiQr } from "../lib/upi-qr";
 
 export const Route = createFileRoute("/history")({
   head: () => ({
@@ -148,6 +149,10 @@ function BillCard({
               <span>Total</span>
               <span>{formatINR(bill.total)}</span>
             </div>
+          </div>
+
+          <div className="mt-4 max-w-sm">
+            <UpiQr amount={bill.total} size={110} />
           </div>
 
           <button
