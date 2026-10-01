@@ -14,16 +14,202 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      bills: {
+        Row: {
+          branch_id: string
+          customer_name: string
+          customer_phone: string
+          date: string
+          discount: number
+          id: string
+          lines: Json
+          number: number
+          staff_id: string | null
+          staff_name: string
+          subtotal: number
+          tax: number
+          total: number
+        }
+        Insert: {
+          branch_id: string
+          customer_name: string
+          customer_phone?: string
+          date?: string
+          discount?: number
+          id?: string
+          lines?: Json
+          number: number
+          staff_id?: string | null
+          staff_name?: string
+          subtotal?: number
+          tax?: number
+          total?: number
+        }
+        Update: {
+          branch_id?: string
+          customer_name?: string
+          customer_phone?: string
+          date?: string
+          discount?: number
+          id?: string
+          lines?: Json
+          number?: number
+          staff_id?: string | null
+          staff_name?: string
+          subtotal?: number
+          tax?: number
+          total?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "bills_branch_id_fkey"
+            columns: ["branch_id"]
+            isOneToOne: false
+            referencedRelation: "branches"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      branches: {
+        Row: {
+          address: string
+          created_at: string
+          id: string
+          logo_url: string | null
+          name: string
+          phone: string
+          upi_id: string
+          user_id: string | null
+          username: string
+        }
+        Insert: {
+          address?: string
+          created_at?: string
+          id?: string
+          logo_url?: string | null
+          name: string
+          phone?: string
+          upi_id?: string
+          user_id?: string | null
+          username: string
+        }
+        Update: {
+          address?: string
+          created_at?: string
+          id?: string
+          logo_url?: string | null
+          name?: string
+          phone?: string
+          upi_id?: string
+          user_id?: string | null
+          username?: string
+        }
+        Relationships: []
+      }
+      items: {
+        Row: {
+          branch_id: string
+          category: string
+          created_at: string
+          duration: number
+          id: string
+          name: string
+          price: number
+        }
+        Insert: {
+          branch_id: string
+          category?: string
+          created_at?: string
+          duration?: number
+          id?: string
+          name: string
+          price?: number
+        }
+        Update: {
+          branch_id?: string
+          category?: string
+          created_at?: string
+          duration?: number
+          id?: string
+          name?: string
+          price?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "items_branch_id_fkey"
+            columns: ["branch_id"]
+            isOneToOne: false
+            referencedRelation: "branches"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      staff: {
+        Row: {
+          branch_id: string
+          created_at: string
+          id: string
+          name: string
+          role: string
+        }
+        Insert: {
+          branch_id: string
+          created_at?: string
+          id?: string
+          name: string
+          role?: string
+        }
+        Update: {
+          branch_id?: string
+          created_at?: string
+          id?: string
+          name?: string
+          role?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "staff_branch_id_fkey"
+            columns: ["branch_id"]
+            isOneToOne: false
+            referencedRelation: "branches"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      user_roles: {
+        Row: {
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
+      my_branch_id: { Args: never; Returns: string }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "branch"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +336,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "branch"],
+    },
   },
 } as const
