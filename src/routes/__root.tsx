@@ -11,7 +11,6 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
-import { StoreProvider } from "../lib/store";
 
 function NotFoundComponent() {
   return (
@@ -126,9 +125,6 @@ function RootShell({ children }: { children: ReactNode }) {
 
 const NAV = [
   { to: "/", label: "New bill" },
-  { to: "/items", label: "Items & services" },
-  { to: "/history", label: "Bill history" },
-  { to: "/staff", label: "Staff" },
 ] as const;
 
 function RootComponent() {
@@ -136,7 +132,7 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <StoreProvider>
+      <>
         <div className="min-h-screen bg-background text-foreground">
           <header className="mx-auto flex max-w-[1440px] items-center justify-between px-6 pt-6 pb-2 lg:px-10">
             <Link to="/" className="flex items-center gap-3">
@@ -173,7 +169,7 @@ function RootComponent() {
 
           <Outlet />
         </div>
-      </StoreProvider>
+      </>
     </QueryClientProvider>
   );
 }
