@@ -119,7 +119,7 @@ function BillPage() {
         </div>
         <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
           {shown.map((i) => {
-            const st = CATEGORY_STYLES[i.category] ?? CATEGORY_STYLES.Other;
+            const st = (CATEGORY_STYLES[i.category] ?? CATEGORY_STYLES["Other"])!;
             return (
               <div key={i.id} className={`rounded-3xl p-5 ${st.card}`}>
                 <span className={`rounded-full px-3 py-1 text-xs ${st.chip}`}>{st.icon} {i.category}</span>
