@@ -148,24 +148,7 @@ function RootComponent() {
                 </div>
               </div>
             </Link>
-            <div className="hidden items-center gap-2 rounded-full bg-card px-3 py-1.5 text-sm ring-1 ring-border sm:flex">
-              <span className="size-2 rounded-full bg-teal" /> Counter open · 9:00–7:00
-            </div>
           </header>
-
-          <nav className="mx-auto flex max-w-[1440px] gap-3 overflow-x-auto px-6 py-6 lg:px-10">
-            {NAV.map((n) => (
-              <Link
-                key={n.to}
-                to={n.to}
-                activeOptions={{ exact: n.to === "/" }}
-                className="shrink-0 rounded-full bg-card px-5 py-2.5 text-sm font-medium text-foreground/70 ring-1 ring-border"
-                activeProps={{ className: "shrink-0 rounded-full bg-plum text-lilac-soft text-sm font-medium px-5 py-2.5 ring-1 ring-plum" }}
-              >
-                {n.label}
-              </Link>
-            ))}
-          </nav>
 
           <Outlet />
         </div>
